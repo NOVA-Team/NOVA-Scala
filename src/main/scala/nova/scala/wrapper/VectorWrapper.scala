@@ -37,6 +37,10 @@ object VectorWrapper {
 
 		def -(other: Double) = underlying.subtract(Vector3DUtil.ONE * other)
 
+		def min(other: Vector3D) = Vector3DUtil.min(underlying, other)
+
+		def max(other: Vector3D) = Vector3DUtil.max(underlying, other)
+
 		def midpoint(other: Vector3D) = Vector3DUtil.midpoint(underlying, other)
 
 		def unary_- = underlying.negate()
