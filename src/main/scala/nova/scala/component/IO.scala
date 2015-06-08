@@ -1,7 +1,15 @@
 package nova.scala.component
 
+import nova.core.block.Block
+import nova.core.component.Component
+import nova.core.component.transform.Orientation
+import nova.core.event.{Event, EventBus}
+import nova.core.network.{Sync, Syncable}
+import nova.core.retention.{Store, Storable}
+import nova.core.util.Direction
+
 /**
- * A Trait that handles input and outputs
+ * A component that handles input and outputs
  *
  * @author Calclavia
  */
