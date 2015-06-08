@@ -27,6 +27,8 @@ object VectorWrapper {
 
 		def zi = underlying.z.toInt
 
+		def abs = Vector3DUtil.abs(underlying)
+
 		def +(other: Vector3D) = underlying.add(other)
 
 		def +(other: Double) = underlying.add(Vector3DUtil.ONE * other)
