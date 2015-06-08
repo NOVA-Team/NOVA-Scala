@@ -1,5 +1,8 @@
 package nova.scala.wrapper
 
+import nova.core.util.math.Vector3DUtil
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D
+
 /**
  * @author Calclavia
  */
@@ -31,6 +34,8 @@ object VectorWrapper {
 		def -(other: Vector3D) = underlying.subtract(other)
 
 		def -(other: Double) = underlying.subtract(Vector3DUtil.ONE * other)
+
+		def midpoint(other: Vector3D) = Vector3DUtil.midpoint(underlying, other)
 
 		def unary_- = underlying.negate()
 

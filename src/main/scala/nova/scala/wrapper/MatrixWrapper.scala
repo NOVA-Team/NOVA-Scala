@@ -1,5 +1,7 @@
 package nova.scala.wrapper
 
+import org.apache.commons.math3.linear.RealMatrix
+
 /**
  * @author Calclavia
  */

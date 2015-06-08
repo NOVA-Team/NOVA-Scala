@@ -1,5 +1,7 @@
 package nova.scala.wrapper
 
+import nova.core.util.Direction
+
 /**
  * Wraps bytes/short/integers to be used for masks
  * @author Calclavia

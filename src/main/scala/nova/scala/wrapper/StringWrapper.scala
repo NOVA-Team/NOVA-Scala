@@ -2,7 +2,7 @@ package nova.scala.wrapper
 
 import java.util.{List => JList}
 
-import scala.collection.convert.wrapAll._
+import com.google.common.base.CaseFormat
 
 /**
  * @author Calclavia
@@ -10,11 +10,6 @@ import scala.collection.convert.wrapAll._
 object StringWrapper {
 
 	implicit class WrappedString(str: String) {
-		def getLocal: String = StatCollector.translateToLocal(str);
-
-		def listWrap(characters: Int): JList[String] = wrap(characters).toList
-
-		def wrap(characters: Int): Array[String] = WordUtils.wrap(str, characters).split("\\r?\\n")
 
 		def toCamelCase: String = str.toPascalCase.decapitalizeFirst
 
