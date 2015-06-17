@@ -56,6 +56,12 @@ object VectorWrapper {
 		def /(other: Double) = underlying.scalarMultiply(1d / other)
 
 		def /(other: Vector3D) = Vector3DUtil.cartesianProduct(underlying, other.reciprocal)
+
+		def floor = Vector3DUtil.floor(underlying)
+
+		def ceil = Vector3DUtil.ceil(underlying)
+
+		def round = Vector3DUtil.round(underlying)
 	}
 
 }
