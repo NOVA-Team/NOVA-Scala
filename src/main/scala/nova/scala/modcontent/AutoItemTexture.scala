@@ -12,5 +12,5 @@ import nova.core.render.texture.ItemTexture
 trait AutoItemTexture extends Item {
 	var texture: ItemTexture = null
 
-	override def getTexture: Optional[ItemTexture] = Optional.of(texture)
+	//	override def getTexture: Optional[ItemTexture] = Optional.of(texture)
 }
