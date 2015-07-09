@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
 	//Dependencies of your project.
+	compile "org.scala-lang:scala-library:2.11.7"
 	compile "nova.core:NovaCore:0.1.0-SNAPSHOT:api" //Depend on the NOVA API.
 }
 
