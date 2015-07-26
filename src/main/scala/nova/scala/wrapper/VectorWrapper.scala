@@ -2,11 +2,26 @@ package nova.scala.wrapper
 
 import nova.core.util.math.Vector3DUtil
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D
 
 /**
  * @author Calclavia
  */
 object VectorWrapper {
+
+	implicit class Vector2DWrapped(underlying: Vector2D) {
+		def x = underlying.getX
+
+		def y = underlying.getY
+
+		def xf = underlying.x.toFloat
+
+		def yf = underlying.y.toFloat
+
+		def xi = underlying.x.toInt
+
+		def yi = underlying.y.toInt
+	}
 
 	implicit class Vector3DWrapped(underlying: Vector3D) {
 		def x = underlying.getX
