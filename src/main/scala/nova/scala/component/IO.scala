@@ -3,9 +3,9 @@ package nova.scala.component
 import nova.core.block.Block
 import nova.core.component.Component
 import nova.core.component.transform.Orientation
-import nova.core.event.{Event, EventBus}
+import nova.core.event.bus.{Event, EventBus}
 import nova.core.network.{Sync, Syncable}
-import nova.core.retention.{Store, Storable}
+import nova.core.retention.{Storable, Store}
 import nova.core.util.Direction
 
 /**

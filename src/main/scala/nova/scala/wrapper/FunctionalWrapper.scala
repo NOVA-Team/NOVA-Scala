@@ -2,7 +2,7 @@ package nova.scala.wrapper
 
 import java.util.function._
 
-import nova.core.event.EventListener
+import nova.core.event.bus.EventListener
 
 /**
  * Implicitly converts Scala methods to Java methods.
