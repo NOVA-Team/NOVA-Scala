@@ -11,6 +11,7 @@ apply from: "https://raw.githubusercontent.com/NOVA-Team/NOVA-Gradle/master/shar
 
 
 dependencies {
+	compile "org.scala-lang:scala-library:2.11.7"
 	compile nova(novaVersion)
 	testCompile group: "nova.core", name: "NOVA-Core", version: novaVersion, classifier: "wrappertests", changing: true
 }
