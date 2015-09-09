@@ -39,11 +39,11 @@ trait ContentLoader extends Loadable {
 						if (itemWrapper.wrapped.newInstance().isInstanceOf[AutoItemTexture]) {
 							val texture = Game.render.registerTexture(new ItemTexture(id, itemWrapper.getID))
 							field.set(self, Game.items.register(
-								(args: Array[AnyRef]) => {
+								supplier(() => {
 									val wrapped = itemWrapper.wrapped.newInstance()
 									wrapped.asInstanceOf[AutoItemTexture].texture = texture
 									wrapped
-								}
+								})
 							))
 						}
 						else {
@@ -53,11 +53,11 @@ trait ContentLoader extends Loadable {
 						if (itemConstructor.wrapped.apply().isInstanceOf[AutoItemTexture]) {
 							val texture = Game.render.registerTexture(new ItemTexture(id, itemConstructor.wrapped.getID))
 							field.set(self, Game.items.register(
-								(args: Array[AnyRef]) => {
+								supplier(() => {
 									val wrapped = itemConstructor.wrapped.apply()
 									wrapped.asInstanceOf[AutoItemTexture].texture = texture
 									wrapped
-								}
+								})
 							))
 						}
 						else {
@@ -69,11 +69,11 @@ trait ContentLoader extends Loadable {
 							val texture = Game.render.registerTexture(new BlockTexture(id, blockWrapper.getID))
 							Game.render.registerTexture(new BlockTexture(id, blockWrapper.getID))
 							field.set(self, Game.blocks.register(
-								(args: Array[AnyRef]) => {
+								supplier(() => {
 									val wrapped = blockWrapper.wrapped.newInstance()
 									wrapped.asInstanceOf[AutoBlockTexture].texture = texture
 									wrapped
-								}
+								})
 							))
 						}
 						else {
@@ -84,11 +84,11 @@ trait ContentLoader extends Loadable {
 							val texture = Game.render.registerTexture(new BlockTexture(id, blockConstructor.getID))
 							Game.render.registerTexture(new BlockTexture(id, blockConstructor.getID))
 							field.set(self, Game.blocks.register(
-								(args: Array[AnyRef]) => {
+								supplier(() => {
 									val wrapped = blockConstructor.wrapped.apply()
 									wrapped.asInstanceOf[AutoBlockTexture].texture = texture
 									wrapped
-								}
+								})
 							))
 						}
 						else {
@@ -110,17 +110,17 @@ trait ContentLoader extends Loadable {
 	/**
 	 * Creates a dummy instances temporarily until the preInit stage has passed
 	 */
-	implicit protected class BlockClassWrapper(val wrapped: Class[_ <: Block]) extends BlockFactory((args: Array[AnyRef]) => wrapped.newInstance())
+	implicit protected class BlockClassWrapper(val wrapped: Class[_ <: Block]) extends BlockFactory(() => wrapped.newInstance())
 
-	implicit protected class BlockConstructorWrapper(val wrapped: () => Block) extends BlockFactory((args: Array[AnyRef]) => wrapped())
+	implicit protected class BlockConstructorWrapper(val wrapped: () => Block) extends BlockFactory(() => wrapped())
 
-	implicit protected class ItemClassWrapper(val wrapped: Class[_ <: Item]) extends ItemFactory((args: Array[AnyRef]) => wrapped.newInstance())
+	implicit protected class ItemClassWrapper(val wrapped: Class[_ <: Item]) extends ItemFactory(() => wrapped.newInstance())
 
-	implicit protected class ItemConstructorWrapper(val wrapped: () => Item) extends ItemFactory((args: Array[AnyRef]) => wrapped())
+	implicit protected class ItemConstructorWrapper(val wrapped: () => Item) extends ItemFactory(() => wrapped())
 
-	implicit protected class EntityClassWrapper(val wrapped: Class[_ <: Entity]) extends EntityFactory((args: Array[AnyRef]) => wrapped.newInstance())
+	implicit protected class EntityClassWrapper(val wrapped: Class[_ <: Entity]) extends EntityFactory(() => wrapped.newInstance())
 
-	implicit protected class EntityConstructorWrapper(val wrapped: () => Entity) extends EntityFactory((args: Array[AnyRef]) => wrapped())
+	implicit protected class EntityConstructorWrapper(val wrapped: () => Entity) extends EntityFactory(() => wrapped())
 
-	//implicit protected class GuiConstructorWrapper(val wrapped: Class[_ <: Gui]) extends GuiFactory((args: Array[AnyRef]) => wrapped.newInstance())
+	//implicit protected class GuiConstructorWrapper(val wrapped: Class[_ <: Gui]) extends GuiFactory(() => wrapped.newInstance())
 }
