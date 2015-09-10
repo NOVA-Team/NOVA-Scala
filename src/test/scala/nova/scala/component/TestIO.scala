@@ -18,21 +18,24 @@
  * along with NOVA.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package nova.scala.wrapper
+package nova.scala.component
+
+import nova.core.block.Block
+import nova.core.util.Direction
+import org.assertj.core.api.Assertions._
+import org.junit.Test
 
 /**
  * @author Calclavia
  */
-object ObjectOrWrapper {
+class TestIO {
 
-	implicit protected class ObjectOrWrapper(obj: AnyRef) {
-		def or(alternative: AnyRef): AnyRef =
-			if (obj == null) {
-				alternative
-			}
-			else {
-				obj
-			}
+	@Test
+	def testGet() {
+		val io = new IO(new Block {
+			override def getID: String = "air"
+		})
+
+		Direction.VALID_DIRECTIONS.foreach(d => assertThat(io.getIO(d)).isEqualTo(1))
 	}
-
 }
