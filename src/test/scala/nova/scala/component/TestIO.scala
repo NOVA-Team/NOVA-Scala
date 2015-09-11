@@ -32,9 +32,7 @@ class TestIO {
 
 	@Test
 	def testGet() {
-		val io = new IO(new Block {
-			override def getID: String = "air"
-		})
+		val io = new IO(new Block())
 
 		Direction.VALID_DIRECTIONS.foreach(d => assertThat(io.getIO(d)).isEqualTo(1))
 	}
