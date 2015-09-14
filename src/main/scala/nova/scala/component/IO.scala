@@ -59,7 +59,7 @@ class IO(block: Block) extends Component with Storable with Syncable {
 	 * Helper method
 	 */
 	def setIOAlternatingOrientation() {
-		val dirMask = 1 << block.get(classOf[Orientation]).orientation.ordinal
+		val dirMask = 1 << block.components.get(classOf[Orientation]).orientation.ordinal
 		val positiveMask = 0x2A
 		val isPositive = (dirMask & positiveMask) != 0
 
