@@ -20,16 +20,12 @@
 
 package nova.scala.modcontent
 
-import java.util.function.{Function => JFunction}
-
 import nova.core.block.{Block, BlockFactory}
 import nova.core.entity.{Entity, EntityFactory}
 import nova.core.item.{Item, ItemFactory}
-import nova.core.loader.Loadable
 import nova.core.render.model.ModelProvider
 import nova.core.render.texture.{BlockTexture, EntityTexture, ItemTexture}
 import nova.internal.core.Game
-import nova.scala.wrapper.FunctionalWrapper._
 
 /**
  * Automatic mffs.content registration for all Blocks, Items, Entities and Textures.
@@ -38,12 +34,12 @@ import nova.scala.wrapper.FunctionalWrapper._
  *
  * @author Calclavia
  */
-trait ContentLoader extends Loadable {
+trait ContentLoader /*extends nova.core.loader.Loadable*/ {
 	self =>
 
 	def id: String
 
-	override def preInit() = {
+	/*override*/ def preInit() = {
 		//Automated handler for registering blocks & items vars
 		for (field <- self.getClass.getDeclaredFields) {
 			//Set it so we can access the field
@@ -59,12 +55,11 @@ trait ContentLoader extends Loadable {
 						if (itemWrapper.wrapped.newInstance().isInstanceOf[AutoItemTexture]) {
 							val texture = Game.render.registerTexture(new ItemTexture(id, itemWrapper.getID))
 							field.set(self, Game.items.register(
-								texture.getClass.getName,
-								supplier(() => {
+								texture.getClass.getName, () => {
 									val wrapped = itemWrapper.wrapped.newInstance()
 									wrapped.asInstanceOf[AutoItemTexture].texture = texture
 									wrapped
-								})
+								}
 							))
 						}
 						else {
@@ -74,12 +69,11 @@ trait ContentLoader extends Loadable {
 						if (itemConstructor.wrapped.apply().isInstanceOf[AutoItemTexture]) {
 							val texture = Game.render.registerTexture(new ItemTexture(id, itemConstructor.wrapped.getID))
 							field.set(self, Game.items.register(
-								texture.getClass.getName,
-								supplier(() => {
+								texture.getClass.getName, () => {
 									val wrapped = itemConstructor.wrapped.apply()
 									wrapped.asInstanceOf[AutoItemTexture].texture = texture
 									wrapped
-								})
+								}
 							))
 						}
 						else {
@@ -91,12 +85,11 @@ trait ContentLoader extends Loadable {
 							val texture = Game.render.registerTexture(new BlockTexture(id, blockWrapper.getID))
 							Game.render.registerTexture(new BlockTexture(id, blockWrapper.getID))
 							field.set(self, Game.blocks.register(
-								texture.getClass.getName,
-								supplier(() => {
+								texture.getClass.getName, () => {
 									val wrapped = blockWrapper.wrapped.newInstance()
 									wrapped.asInstanceOf[AutoBlockTexture].texture = texture
 									wrapped
-								})
+								}
 							))
 						}
 						else {
@@ -107,12 +100,11 @@ trait ContentLoader extends Loadable {
 							val texture = Game.render.registerTexture(new BlockTexture(id, blockConstructor.getID))
 							Game.render.registerTexture(new BlockTexture(id, blockConstructor.getID))
 							field.set(self, Game.blocks.register(
-								texture.getClass.getName,
-								supplier(() => {
+								texture.getClass.getName, () => {
 									val wrapped = blockConstructor.wrapped.apply()
 									wrapped.asInstanceOf[AutoBlockTexture].texture = texture
 									wrapped
-								})
+								}
 							))
 						}
 						else {
