@@ -11,20 +11,20 @@ build.dependsOn scaladoc
 
 apply from: "https://raw.githubusercontent.com/NOVA-Team/NOVA-Gradle/master/shared-scripts/java.gradle"
 
-
 dependencies {
 	compile "org.scala-lang:scala-library:2.12.3"
-	compile "nova.core:NOVA-Core:$novaVersion"
-	testCompile "nova.core:NOVA-Core:$novaVersion:wrappertests"
+	compile "nova.core:NOVA-Core:$nova_version"
+	testCompile "nova.core:NOVA-Core:$nova_version:wrappertests"
 }
+
 nova {
 	wrappers {
 		"17" {
-			wrapper "nova.core:NOVA-Core-Wrapper-MC1.7:$novaVersion"
+			wrapper "nova.core:NOVA-Core-Wrapper-MC1.7:$nova_version"
 		}
 
 		"18" {
-			wrapper "nova.core:NOVA-Core-Wrapper-MC1.8:$novaVersion"
+			wrapper "nova.core:NOVA-Core-Wrapper-MC1.8:$nova_version"
 		}
 	}
 }
