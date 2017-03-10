@@ -14,17 +14,18 @@ apply from: "https://raw.githubusercontent.com/NOVA-Team/NOVA-Gradle/master/shar
 
 dependencies {
 	compile "org.scala-lang:scala-library:2.12.1"
-	compile "nova.core:NOVA-Core:$novaVersion"
-	testCompile "nova.core:NOVA-Core:$novaVersion:wrappertests"
+	// TODO: use `compile nova(nova_version)`
+	compile "nova.core:NOVA-Core:$nova_version"
+	testCompile "nova.core:NOVA-Core:$nova_version:wrappertests"
 }
 nova {
 	wrappers {
 		"17" {
-			wrapper "nova.core:NOVA-Core-Wrapper-MC1.7:$novaVersion"
+			wrapper "nova.core:NOVA-Core-Wrapper-MC1.7:$nova_version"
 		}
 
 		"18" {
-			wrapper "nova.core:NOVA-Core-Wrapper-MC1.8:$novaVersion"
+			wrapper "nova.core:NOVA-Core-Wrapper-MC1.8:$nova_version"
 		}
 	}
 }
